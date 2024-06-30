@@ -1,0 +1,32 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: plotx
+    network: mainnet
+    source:
+      address: "0x72F020f8f3E8fd9382705723Cd26380f8D0c66Bb"
+      abi: plotx
+      startBlock: 11033773
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+        - Approval
+        - Allowance
+        - Mint
+        - Burn
+      abis:
+        - name: plotx
+          file: ./abis/plotx.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+      file: ./src/plotx.ts
