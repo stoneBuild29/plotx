@@ -30,7 +30,7 @@ export function handleTransfer(event: TransferEvent): void {
   // Handle Mint
   if (isZeroAddress(event.params.from)) {
     let mint = new Mint(
-      event.transaction.hash.toString() + "-" + event.logIndex.toString()
+      event.transaction.hash.toHex() + "-" + event.logIndex.toString()
     )
     mint.blockNumber = event.block.number
     mint.blockTimestamp = event.block.timestamp
@@ -43,7 +43,7 @@ export function handleTransfer(event: TransferEvent): void {
   // Handle Burn
   if (isZeroAddress(event.params.to)) {
     let burn = new Burn(
-      event.transaction.hash.toString() + "-" + event.logIndex.toString()
+      event.transaction.hash.toHex() + "-" + event.logIndex.toString()
     )
     burn.blockNumber = event.block.number
     burn.blockTimestamp = event.block.timestamp
